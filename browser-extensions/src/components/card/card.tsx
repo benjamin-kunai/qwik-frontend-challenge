@@ -1,16 +1,21 @@
-import { component$, Slot } from "@builder.io/qwik";
+import { component$, QRL, $ } from "@builder.io/qwik";
 import { Toggle } from "../toggle/toggle";
 import { Button } from "../button/button";
+import { Extension } from "~/routes";
 
 interface CardProps {
-  title: string;
-  description: string;
-  logo?: string;
-  isActive?: boolean;
+  extension: Extension;
+  onRemove$: QRL<(id: number) => void>;
+  onToggle$: QRL<(id: number) => void>;
 }
 
 export const Card = component$<CardProps>(
-  ({ title, description, logo, isActive }) => {
+  ({ extension, onRemove$, onToggle$ }) => {
+    const { logo, name: title, description, isActive, id } = extension;
+
+    const removeExtension = $(() => onRemove$(id));
+    const toggleExtension = $(() => onToggle$(id));
+
     return (
       <div class="h-50 w-100 rounded-lg bg-white p-4 shadow-lg dark:bg-neutral-600">
         <div class="flex flex-col justify-between h-full">
@@ -24,8 +29,8 @@ export const Card = component$<CardProps>(
             </div>
           </div>
           <div class="mt-4 flex justify-between">
-            <Button>Remove</Button>
-            <Toggle />
+            <Button onClick$={removeExtension}>Remove</Button>
+            <Toggle onToggle$={toggleExtension} active={isActive} />
           </div>
         </div>
       </div>

@@ -1,11 +1,14 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useComputed$, useSignal, $ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { routeLoader$ } from "@builder.io/qwik-city";
+import { Button } from "~/components/button/button";
 import { Card } from "~/components/card/card";
+import { ExtensionFilters } from "~/components/extension-filters/extension-filters";
 
 const BASE_URL = "http://localhost:5173/";
 
 export interface Extension {
+  id: number;
   logo: string;
   name: string;
   description: string;
@@ -26,19 +29,46 @@ export const useExtensions = routeLoader$<Extension[]>(async() => {
  * @returns {JSX.Element} The rendered card
  */
 export default component$(() => {
-  const extensions = useExtensions();
-  console.log(extensions.value);
+  const extensionsData = useExtensions();
+  const allExtensions = useSignal<Extension[]>(extensionsData.value);
+  const viewedExtensions = useSignal<Extension[]>(allExtensions.value);
+
+  const activeExtensions = useComputed$<Extension[]>(() => {
+    return allExtensions.value.filter((extension) => extension.isActive);
+  });
+
+  const inactiveExtensions = useComputed$<Extension[]>(() => {
+    return allExtensions.value.filter((extension) => !extension.isActive);
+  });
+
+  const removeExtension = $((id: number) => {
+    console.log("removeExtension", id);
+    allExtensions.value = allExtensions.value.filter((e) => e.id !== id);
+  });
+
+  const toggleExtension = $((id: number) => {
+    allExtensions.value = allExtensions.value.map((extension) =>
+      extension.id === id ? { ...extension, isActive: !extension.isActive } : extension,
+    );
+  });
 
   return (
-    <div class="flex">
-      {extensions.value.map((extension) => (
-        <Card
-          title={extension.name}
-          description={extension.description}
-          logo={extension.logo}
-          isActive={extension.isActive}
+    <div>
+      <ExtensionFilters>
+        <Button onClick$={() => viewedExtensions.value = allExtensions.value}>All</Button>
+        <Button onClick$={() => viewedExtensions.value = activeExtensions.value}>Active</Button>
+        <Button onClick$={() => viewedExtensions.value = inactiveExtensions.value}>Inactive</Button>
+      </ExtensionFilters>
+      <div class="grid grid-cols-3 gap-4">
+        {viewedExtensions.value.map((extension) => (
+          <Card
+          key={extension.name}
+          extension={extension}
+          onRemove$={removeExtension}
+          onToggle$={toggleExtension}
         />
-      ))}
+        ))}
+      </div>
     </div>
   );
 });

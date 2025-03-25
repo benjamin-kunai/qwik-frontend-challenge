@@ -1,20 +1,16 @@
-import { component$, Slot, useSignal } from "@builder.io/qwik";
+import { component$, QRL, Slot, useSignal } from "@builder.io/qwik";
 interface ToggleProps {
     active?: boolean;
+    onToggle$: QRL<() => void>;
 }
 
-export const Toggle = component$<ToggleProps>(({active}) => {
-
-    const checked = useSignal(active);
+export const Toggle = component$<ToggleProps>(({active, onToggle$}) => {
 
   return (
     <label class="group relative flex items-center justify-between p-2 text-xl">
       <input
-      onClick$={() => {
-        checked.value = !checked.value;
-        console.log(checked.value);
-      }}
-        checked={checked.value}
+        onClick$={onToggle$}
+        checked={active}
         type="checkbox"
         class="peer absolute left-1/2 h-full w-full -translate-x-1/2 appearance-none rounded-md cursor-pointer"
       />
