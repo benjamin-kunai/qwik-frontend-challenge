@@ -1,20 +1,23 @@
 @import "tailwindcss";
 
-:root {
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+@theme {
     /* Neutral Colors */
-    --neutral-900: hsl(227, 75%, 14%);
-    --neutral-800: hsl(226, 25%, 17%);
-    --neutral-700: hsl(225, 23%, 24%);
-    --neutral-600: hsl(226, 11%, 37%);
-    --neutral-300: hsl(0, 0%, 78%);
-    --neutral-200: hsl(217, 61%, 90%);
-    --neutral-100: hsl(0, 0%, 93%);
-    --neutral-0: hsl(200, 60%, 99%);
+    --color-neutral-900: hsl(227, 75%, 14%);
+    --color-neutral-800: hsl(226, 25%, 17%);
+    --color-neutral-700: hsl(225, 23%, 24%);
+    --color-neutral-600: hsl(226, 11%, 37%);
+    --color-neutral-300: hsl(0, 0%, 78%);
+    --color-neutral-200: hsl(217, 61%, 90%);
+    --color-neutral-100: hsl(0, 0%, 93%);
+    --color-neutral-0: hsl(200, 60%, 99%);
 
     /* Red Colors */
-    --red-700: hsl(3, 77%, 44%);
-    --red-500: hsl(3, 71%, 56%);
-    --red-400: hsl(3, 86%, 64%);
+    --color-red-700: hsl(3, 77%, 44%);
+    --color-red-500: hsl(3, 71%, 56%);
+    --color-red-400: hsl(3, 86%, 64%);
 
     /* Semantic Colors */
     --color-primary-lightmode: var(--neutral-900);
@@ -30,6 +33,7 @@
     --border-radius-md: 8px;
     --border-radius-sm: 4px;
 }
+
 
 body {
     font-family: 'Noto Sans', sans-serif;

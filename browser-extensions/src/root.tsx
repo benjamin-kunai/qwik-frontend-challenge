@@ -18,7 +18,7 @@ export default component$(() => {
    */
 
   return (
-    <QwikCityProvider>
+    <QwikCityProvider >
       <head>
         <meta charset="utf-8" />
         {!isDev && (
@@ -29,7 +29,7 @@ export default component$(() => {
         )}
         <RouterHead />
       </head>
-      <body lang="en">
+      <body class="bg-light-gradient text-neutral-900 dark:bg-dark-gradient dark:text-neutral-300" lang="en">
         <RouterOutlet />
         {!isDev && <ServiceWorkerRegister />}
       </body>
