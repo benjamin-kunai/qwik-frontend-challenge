@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
     /* Neutral Colors */
     --neutral-900: hsl(227, 75%, 14%);
