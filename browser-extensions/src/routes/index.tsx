@@ -4,7 +4,7 @@ import { routeLoader$ } from "@builder.io/qwik-city";
 import { Button } from "~/components/button/button";
 import { Card } from "~/components/card/card";
 import { ExtensionFilters } from "~/components/extension-filters/extension-filters";
-
+import { SiteHeader } from "~/components/header/site-header";
 const BASE_URL = "http://localhost:5173/";
 
 export interface Extension {
@@ -58,12 +58,14 @@ export default component$(() => {
 
   return (
     <div>
+      <div class="mb-10">
       <ExtensionFilters>
-        <Button onClick$={() => viewedExtensions.value = allExtensions.value}>All</Button>
-        <Button onClick$={() => viewedExtensions.value = activeExtensions.value}>Active</Button>
-        <Button onClick$={() => viewedExtensions.value = inactiveExtensions.value}>Inactive</Button>
+        <Button classList="px-5 py-2 text-lg" variant="active" onClick$={() => viewedExtensions.value = allExtensions.value}>All</Button>
+        <Button classList="px-5 py-2 text-lg" onClick$={() => viewedExtensions.value = activeExtensions.value}>Active</Button>
+        <Button classList="px-5 py-2 text-lg" onClick$={() => viewedExtensions.value = inactiveExtensions.value}>Inactive</Button>
       </ExtensionFilters>
-      <div class="grid grid-cols-3 gap-4">
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center">
         {viewedExtensions.value.map((extension) => (
           <Card
           key={extension.name}

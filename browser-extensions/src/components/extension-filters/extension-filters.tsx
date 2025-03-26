@@ -4,11 +4,11 @@ export interface ExtensionFiltersProps {}
 
 export const ExtensionFilters = component$<ExtensionFiltersProps>(({}) => {
   return (
-    <div class="flex justify-between">
+    <div class="flex flex-col md:flex-row md:justify-between items-center gap-5">
       <div>
-        <h2>Extensions List</h2>
+        <div class="text-3xl font-bold">Extensions List</div>
       </div>
-      <div>
+      <div class="flex gap-3">
         <Slot />
       </div>
     </div>

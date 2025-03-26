@@ -27,14 +27,6 @@
     --gradient-light-end: #EEF8F9;
     --gradient-dark-start: #040918;
     --gradient-dark-end: #091540;
-
-    /* Border Radius */
-    --border-radius-full: 9999px;
-    --border-radius-lg: 12px;
-    --border-radius-md: 8px;
-    --border-radius-sm: 4px;
-
-    --color-my-color: red;
 }
 
 body {

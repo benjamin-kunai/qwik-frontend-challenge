@@ -38,17 +38,14 @@ export default component$(() => {
           })();
         `} />
         {!isDev && (
-          <>
           <link
             rel="manifest"
             href={`${import.meta.env.BASE_URL}manifest.json`}
           />
-          <link href = './global.css' rel = 'stylesheet' />
-          </>
         )}
         <RouterHead />
       </head>
-      <body class="bg-custom-gradient text-custom-neutral-900 dark:text-custom-neutral-200" lang="en">
+      <body class="min-h-screen bg-custom-gradient text-custom-neutral-900 dark:text-custom-neutral-200" lang="en">
         <RouterOutlet />
         {!isDev && <ServiceWorkerRegister />}
       </body>

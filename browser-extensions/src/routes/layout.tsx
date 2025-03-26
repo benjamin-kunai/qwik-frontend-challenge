@@ -14,9 +14,13 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 
 export default component$(() => {
   return (
-    <>
-      <SiteHeader />
-      <Slot />
-    </>
+    <header>
+      <div class="flex flex-col items-center">
+        <div class="w-full max-w-7xl px-4 mb-10">
+          <SiteHeader classList="mt-10 mb-15" />
+          <Slot />
+        </div>
+      </div>
+    </header>
   );
 });
