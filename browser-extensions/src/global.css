@@ -18,10 +18,6 @@
     --color-custom-red-500: hsl(3, 71%, 56%);
     --color-custom-red-400: hsl(3, 86%, 64%);
 
-    /* Semantic Colors */
-    --color-primary-lightmode: var(--color-custom-neutral-900);
-    --color-primary-darkmode: var(--color-custom-neutral-300);
-
     /* Gradients */
     --gradient-light-start: #EBF2FC;
     --gradient-light-end: #EEF8F9;
@@ -30,7 +26,7 @@
 }
 
 body {
-    font-family: 'Noto Sans', sans-serif;
+   
     font-size: 16px;
     font-weight: 400;
 }
