@@ -31,7 +31,10 @@ export const useExtensions = routeLoader$<Extension[]>(async() => {
 export default component$(() => {
   const extensionsData = useExtensions();
   const allExtensions = useSignal<Extension[]>(extensionsData.value);
-  const viewedExtensions = useSignal<Extension[]>(allExtensions.value);
+
+  const viewedExtensions = useComputed$<Extension[]>(() => {
+    return allExtensions.value;
+  });
 
   const activeExtensions = useComputed$<Extension[]>(() => {
     return allExtensions.value.filter((extension) => extension.isActive);
@@ -40,6 +43,7 @@ export default component$(() => {
   const inactiveExtensions = useComputed$<Extension[]>(() => {
     return allExtensions.value.filter((extension) => !extension.isActive);
   });
+  console.log({activeExtensions, inactiveExtensions});
 
   const removeExtension = $((id: number) => {
     console.log("removeExtension", id);

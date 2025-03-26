@@ -21,15 +21,34 @@ export default component$(() => {
     <QwikCityProvider >
       <head>
         <meta charset="utf-8" />
+        <script dangerouslySetInnerHTML={`
+          (function() {
+            try {
+              const theme = localStorage.getItem('theme') || 'light';
+              const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+              
+              if (theme === 'dark' || (theme === 'system' && prefersDark)) {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+            } catch (e) {
+              console.error('Error accessing localStorage:', e);
+            }
+          })();
+        `} />
         {!isDev && (
+          <>
           <link
             rel="manifest"
             href={`${import.meta.env.BASE_URL}manifest.json`}
           />
+          <link href = './global.css' rel = 'stylesheet' />
+          </>
         )}
         <RouterHead />
       </head>
-      <body class="bg-light-gradient text-neutral-900 dark:bg-dark-gradient dark:text-neutral-300" lang="en">
+      <body class="bg-custom-gradient text-custom-neutral-900 dark:text-custom-neutral-200" lang="en">
         <RouterOutlet />
         {!isDev && <ServiceWorkerRegister />}
       </body>
